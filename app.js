@@ -11,8 +11,8 @@ const customerMessage = "Your Table is ready, please come!";
 
 function setMode() {
   const mode = location.hash === "#owner" ? "owner" : "customer";
-  $("#customerView").classList.toggle("active", mode === "customer");
-  $("#ownerView").classList.toggle("active", mode === "owner");
+  $("#customerView").classList.toggle("hidden", mode !== "customer");
+  $("#ownerView").classList.toggle("hidden", mode !== "owner");
   document.body.classList.toggle("owner-mode", mode === "owner");
   $("#ownerGate").classList.toggle("hidden", mode !== "owner" || Boolean(state.ownerPin));
   $(".owner-layout").classList.toggle("hidden", mode !== "owner" || !state.ownerPin);
@@ -172,13 +172,15 @@ async function refresh() {
 }
 
 async function loadConfig() {
-  const config = await api("/api/config");
+  const config = await api("/api/config").catch(() => ({ urls: [] }));
   const select = $("#urlSelect");
   select.innerHTML = "";
-  config.urls.forEach((url) => {
+  const currentCustomerUrl = `${window.location.origin}/#customer`;
+  const urls = [currentCustomerUrl, ...(config.urls || []).filter((url) => url !== currentCustomerUrl)];
+  urls.forEach((url) => {
     const option = document.createElement("option");
-    option.value = `${url}/#customer`;
-    option.textContent = `${url}/#customer`;
+    option.value = url.includes("#customer") ? url : `${url}/#customer`;
+    option.textContent = option.value;
     select.append(option);
   });
   state.customerUrl = select.value;
@@ -279,5 +281,5 @@ $("#copyLink").addEventListener("click", async () => {
 });
 
 window.addEventListener("hashchange", setMode);
-loadConfig().then(setMode);
+loadConfig().finally(setMode);
 state.poll = setInterval(refresh, 5000);
