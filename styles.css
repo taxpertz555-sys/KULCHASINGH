@@ -100,10 +100,6 @@ h2 {
 }
 
 .view {
-  display: none;
-}
-
-.view.active {
   display: block;
 }
 
@@ -359,6 +355,41 @@ button {
 }
 
 @media (max-width: 820px) {
+  .shell {
+    width: min(100% - 20px, 1180px);
+    padding: 14px 0 20px;
+  }
+
+  .hotel-hero {
+    margin-bottom: 12px;
+  }
+
+  .hotel-hero img {
+    max-height: 140px;
+    max-width: min(100%, 260px);
+  }
+
+  .brand {
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+    line-height: 1.02;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .gate-panel {
+    margin-bottom: 14px;
+  }
+
   .brand,
   .queue-head,
   .queue-top {
