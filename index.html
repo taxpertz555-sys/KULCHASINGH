@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hotel Table Queue</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <figure class="hotel-hero">
+        <img src="/kulcha-singh.png" alt="Kulcha Singh" />
+      </figure>
+      <section class="brand">
+        <div>
+          <p class="eyebrow">Live waitlist</p>
+          <h1 id="hotelName">Hotel Table Queue</h1>
+        </div>
+      </section>
+
+      <section id="customerView" class="view">
+        <div class="customer-grid">
+          <form id="joinForm" class="panel form-panel" autocomplete="on">
+            <div>
+              <p class="eyebrow">Scan, join, relax</p>
+              <h2>Get your table token</h2>
+            </div>
+            <label>
+              Name
+              <input name="name" type="text" placeholder="Your name" minlength="2" required />
+            </label>
+            <label>
+              Phone No
+              <input name="phone" type="tel" placeholder="9876543210" minlength="8" required />
+            </label>
+            <label>
+              No. of seats required
+              <input name="seats" type="number" min="1" max="30" value="2" required />
+            </label>
+            <button class="primary" type="submit">Join Queue</button>
+            <p class="form-error" id="formError" role="alert"></p>
+          </form>
+
+          <article id="ticket" class="panel ticket empty">
+            <p class="eyebrow">Your queue status</p>
+            <div class="token-number" id="ticketToken">--</div>
+            <p id="ticketMessage">Fill the form to receive your token number, position, and wait time.</p>
+            <div class="ticket-stats">
+              <div>
+                <span>Position</span>
+                <strong id="ticketPosition">--</strong>
+              </div>
+              <div>
+                <span>Est. wait</span>
+                <strong id="ticketWait">--</strong>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="ownerView" class="view">
+        <form id="ownerGate" class="panel gate-panel" autocomplete="off">
+          <div>
+            <p class="eyebrow">Owner only</p>
+            <h2>Enter owner PIN</h2>
+          </div>
+          <label>
+            PIN
+            <input id="ownerPin" type="password" inputmode="numeric" placeholder="1234" required />
+          </label>
+          <button class="primary" type="submit">Open Dashboard</button>
+          <p class="form-error" id="pinError" role="alert"></p>
+        </form>
+        <div class="owner-layout">
+          <aside class="panel owner-tools">
+            <div>
+              <p class="eyebrow">Owner controls</p>
+              <h2>Queue setup</h2>
+            </div>
+            <label>
+              Hotel name
+              <input id="hotelInput" type="text" maxlength="80" />
+            </label>
+            <label>
+              Minutes per table
+              <input id="avgInput" type="number" min="1" max="60" />
+            </label>
+            <label>
+              Change owner PIN
+              <input id="newPinInput" type="password" maxlength="24" placeholder="Leave blank to keep current PIN" />
+            </label>
+            <button id="saveSettings" class="secondary" type="button">Save Settings</button>
+            <button id="clearQueue" class="danger" type="button">Clear Queue</button>
+            <div class="qr-box">
+              <div id="qrCode" aria-label="Customer QR code"></div>
+              <p>Customer QR</p>
+              <select id="urlSelect" aria-label="Customer link"></select>
+              <button id="copyLink" class="secondary" type="button">Copy Link</button>
+            </div>
+          </aside>
+
+          <section class="panel queue-panel">
+            <div class="queue-head">
+              <div>
+                <p class="eyebrow">Live queue</p>
+                <h2><span id="waitingCount">0</span> waiting</h2>
+              </div>
+              <button id="refreshQueue" class="icon-button" type="button" title="Refresh">Refresh</button>
+            </div>
+            <div id="queueList" class="queue-list"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

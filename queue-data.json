@@ -1,0 +1,18 @@
+{
+  "hotelName": "Hotel Table Queue",
+  "averageMinutesPerTable": 8,
+  "ownerPin": "5419",
+  "nextToken": 2,
+  "entries": [
+    {
+      "id": "39516bd331e54674b4e7d177bd9edf98",
+      "token": 1,
+      "name": "tarun jain",
+      "phone": "9892811433",
+      "seats": 2,
+      "status": "ready",
+      "createdAt": 1782216681504,
+      "readyAt": 1782217137393
+    }
+  ]
+}
